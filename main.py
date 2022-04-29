@@ -28,7 +28,7 @@ def getArgParser():
     argparser = argparse.ArgumentParser( add_help=True, description="""Some tools to play with BGP and ASes""" )
 
     group_action = argparser.add_mutually_exclusive_group()
-    group_action.add_argument( "--as", action="store_true", help="Extract and computes ASes from sources")
+    group_action.add_argument( "--ases", action="store_true", help="Extract and computes ASes from sources")
     group_action.add_argument( "--path", action="store_true", help="Extract and computes path anoucements from sources")
 
 
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     INPUT_DIR, OUTPUT_DIR = check_datas.check_directories()
     AS_ok, AS_FR_ok, dump_ok = check_datas.check_sources()
 
-    if args.as:
+    if args.ases:
         if args.source == "web":
             get_AS.extract_AS( get_AS.update_AS(), args.format, args.extract_only_fr, OUTPUT_DIR )
         else:
