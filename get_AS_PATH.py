@@ -19,13 +19,10 @@ def test_inconsistency(source):
         if a not in annoucedAS:
             print("Alone : ",a)
 
-def load_french_AS(source):
+def load_json_file(source):
     with open(source, "r") as jf:
         return json.load(jf)
 
-def load_all_AS(source):
-    with open(source, "r") as jf:
-        return json.load(jf)
 
 def check_neighbor(l):
     AS1, AS2 = l.split(' ')
@@ -42,9 +39,13 @@ def check_neighbor(l):
         else:
             neighbor.update({country:1})
 
-def get_path(source):
+def get_path(AS_FR_file, AS_file, source, out_dir):
     nodes = set()
     links = set()
+
+    AS_fr = load_json_file(AS_FR_file)
+    AS = load_json_file(AS_file)
+
 
     for line in open(source, "r"):
         ASpath = line.split("|")[6].split(" ")
@@ -60,7 +61,7 @@ def get_path(source):
                     links.add(AS1 + " " + AS2)
 
     # neighbor nationality and save links to cvs
-    with open("datas/links_AS_fr.csv","w") as csv_out:
+    with open( out_dir + "links_AS_fr.csv","w") as csv_out:
         for l in links:
             check_neighbor(l)
             csv_out.write(l.replace(" ", ",")  +"\n")

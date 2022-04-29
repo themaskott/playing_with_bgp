@@ -54,7 +54,7 @@ def extract_AS(source, output_format="json", extract_only_fr=False, out_dir):
     parser.feed(source)
 
     # named according desired parameters
-    out_name = out_dir + "/AS_FR."  + output_format if extract_only_fr else out_dir + "/AS." + output_format
+    out_name = out_dir + "AS_FR."  + output_format if extract_only_fr else out_dir + "AS." + output_format
 
     if output_format == "csv":
         with open(out_name, "w") as out:

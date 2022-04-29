@@ -7,13 +7,13 @@ Under build so not much to expect
 
 """
 
-
-
 # import from python
 import argparse
 
 # custom import
 import check_datas
+import get_AS
+import get_AS_PATH
 
 # globals
 
@@ -33,7 +33,7 @@ def getArgParser():
 
 
     group_as = argparser.add_argument_group("AS")
-    group_as.add_argument( "--source", action="store", default="autnums.html", help="Source file" )
+    group_as.add_argument( "--source", action="store", default="web", help="Source file" )
     group_as.add_argument( "--format", action="store", default="json", help="Output format json or csv" )
     group_as.add_argument( "--only-fr", action="store_true", default=False, help="Extract only french ASes" )
 
@@ -52,4 +52,19 @@ if __name__ == "__main__":
     args = getArgParser().parse_args()
 
     INPUT_DIR, OUTPUT_DIR = check_datas.check_directories()
-    AS_file, AS_FR_file, dump_file = check_datas.check_sources()
+    AS_ok, AS_FR_ok, dump_ok = check_datas.check_sources()
+
+    if args.as:
+        if args.source == "web":
+            get_AS.extract_AS( get_AS.update_AS(), args.format, args.extract_only_fr, OUTPUT_DIR )
+        else:
+            get_AS.extract_AS( args.source, args.format, args.extract_only_fr, OUTPUT_DIR )
+
+
+    if args.path:
+        if not AS_ok: print("[-] AS.json not present in datas")
+        if not AF_FR_ok: print("[-] AS_FR.json not present in datas")
+        if not dump_ok: print("[-] dump.txt not present in datas")
+
+        if AS_file and AS_FR_file and dump_file:
+            get_AS_PATH.get_path( INPUT_DIR + args.fr, INPUT_DIR + args.all, INPUT_DIR + args.dump, OUTPUT_DIR )
