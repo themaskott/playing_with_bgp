@@ -17,8 +17,8 @@ import get_AS_PATH
 
 # globals
 
-INPUT_DIR = ""
-OUTPUT_DIR = ""
+DATAS_DIR = ""
+RESULTS_DIR = ""
 
 def getArgParser():
     """
@@ -51,14 +51,14 @@ if __name__ == "__main__":
 
     args = getArgParser().parse_args()
 
-    INPUT_DIR, OUTPUT_DIR = check_datas.check_directories()
+    DATAS_DIR, RESULTS_DIR = check_datas.check_directories()
     AS_ok, AS_FR_ok, dump_ok = check_datas.check_sources()
 
     if args.ases:
         if args.source == "web":
-            get_AS.extract_AS( get_AS.update_AS(), args.format, args.only_fr, OUTPUT_DIR )
+            get_AS.extract_AS( get_AS.update_AS(), args.format, args.only_fr, RESULTS_DIR )
         else:
-            get_AS.extract_AS( open(args.source).read(), args.format, args.only_fr, OUTPUT_DIR )
+            get_AS.extract_AS( open(args.source).read(), args.format, args.only_fr, RESULTS_DIR )
 
 
     if args.path:
@@ -67,4 +67,4 @@ if __name__ == "__main__":
         if not dump_ok: print("[-] dump.txt not present in datas")
 
         if AS_ok and AS_FR_ok and dump_ok:
-            get_AS_PATH.get_path( INPUT_DIR + args.fr, INPUT_DIR + args.all, INPUT_DIR + args.dump, OUTPUT_DIR )
+            get_AS_PATH.get_path( RESULTS_DIR + args.fr, RESULTS_DIR + args.all, DATAS_DIR + args.dump, RESULTS_DIR )
