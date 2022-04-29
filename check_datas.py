@@ -8,5 +8,5 @@ def check_directories() -> str:
     if not path.isdir("results"): mkdir("results", 0o755)
     return "datas/", "results/"
 
-def check_sources() -> bool:
-    return path.isfile("datas/AS.json"), path.isfile("datas/AS_FR.json"), path.isfile("datas/dump.txt")
+def check_sources(datas:str, results:str) -> bool:
+    return path.isfile( results + "AS.json"), path.isfile( results + "AS_FR.json"), path.isfile(datas + "dump.txt")
