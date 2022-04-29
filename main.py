@@ -66,5 +66,5 @@ if __name__ == "__main__":
         if not AS_FR_ok: print("[-] AS_FR.json not present in datas")
         if not dump_ok: print("[-] dump.txt not present in datas")
 
-        if AS_file and AS_FR_file and dump_file:
+        if AS_ok and AS_FR_ok and dump_ok:
             get_AS_PATH.get_path( INPUT_DIR + args.fr, INPUT_DIR + args.all, INPUT_DIR + args.dump, OUTPUT_DIR )
