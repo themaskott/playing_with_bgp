@@ -40,6 +40,9 @@ def check_neighbor(l):
             neighbor.update({country:1})
 
 def get_path(AS_FR_file, AS_file, source, out_dir):
+
+    global AS, AS_fr, neighbor
+
     nodes = set()
     links = set()
 
@@ -60,7 +63,7 @@ def get_path(AS_FR_file, AS_file, source, out_dir):
                     nodes.add(AS2)
                     links.add(AS1 + " " + AS2)
 
-    # neighbor nationality and save links to cvs
+    # neighbor nationality and save links to csv
     with open( out_dir + "links_AS_fr.csv","w") as csv_out:
         for l in links:
             check_neighbor(l)
