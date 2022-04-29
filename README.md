@@ -73,3 +73,32 @@ cat AS.json | jq | head -n 21
 ### 2 - `links_AS_fr.csv`
 
 Links between French ASes and other ASes.
+
+## Some features
+
+```
+usage: main.py [-h] [--ases | --path] [--source SOURCE] [--format FORMAT] [--only-fr] [--fr FR] [--all ALL]
+               [--dump DUMP] [--version]
+
+Some tools to play with BGP and ASes
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --ases           Extract and computes ASes from sources
+  --path           Extract and computes path anoucements from sources
+  --version        show program's version number and exit
+
+AS:
+  --source SOURCE  Source file
+  --format FORMAT  Output format json or csv
+  --only-fr        Extract only french ASes
+
+PATH:
+  --fr FR          French ASes file
+  --all ALL        All ASes file
+  --dump DUMP      Bview dump file
+  ```
+
+  `--ases` : produce `AS[_FR].json` files (or csv if asked)
+
+  `--path` : parse AS path in `dump.txt` and produce `links_AS_fr.csv`, both previous json files are needed.
