@@ -52,7 +52,7 @@ if __name__ == "__main__":
     args = getArgParser().parse_args()
 
     DATAS_DIR, RESULTS_DIR = check_datas.check_directories()
-    AS_ok, AS_FR_ok, dump_ok = check_datas.check_sources()
+    AS_ok, AS_FR_ok, dump_ok = check_datas.check_sources(DATAS_DIR, RESULTS_DIR)
 
     if args.ases:
         if args.source == "web":
