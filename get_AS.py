@@ -44,7 +44,7 @@ def update_AS():
     return r.content.decode()
 
 
-def extract_AS(source, output_format="json", extract_only_fr=False, out_dir):
+def extract_AS(source, output_format, extract_only_fr, out_dir):
     """
     Apply parser to input
     Output is a json or cvs
