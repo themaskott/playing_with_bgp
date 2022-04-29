@@ -63,7 +63,7 @@ if __name__ == "__main__":
 
     if args.path:
         if not AS_ok: print("[-] AS.json not present in datas")
-        if not AF_FR_ok: print("[-] AS_FR.json not present in datas")
+        if not AS_FR_ok: print("[-] AS_FR.json not present in datas")
         if not dump_ok: print("[-] dump.txt not present in datas")
 
         if AS_file and AS_FR_file and dump_file:
