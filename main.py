@@ -58,7 +58,7 @@ if __name__ == "__main__":
         if args.source == "web":
             get_AS.extract_AS( get_AS.update_AS(), args.format, args.only_fr, OUTPUT_DIR )
         else:
-            get_AS.extract_AS( args.source, args.format, args.only_fr, OUTPUT_DIR )
+            get_AS.extract_AS( open(args.source).read(), args.format, args.only_fr, OUTPUT_DIR )
 
 
     if args.path:
