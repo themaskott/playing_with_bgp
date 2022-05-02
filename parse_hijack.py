@@ -26,7 +26,7 @@ def parse_json_hijack(all_hijack_json):
                 conflicts.add("AS" + str(data["announce"]["asn"]) + " " + "AS" + str(data["asn"]))
     return conflicts
 
-def search_hijacker(conflicts, datas):
+def search_hijacker(datas):
     """
     Determine hijacks from previously parsed suspicious annoucement
     """

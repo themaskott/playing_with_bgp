@@ -78,4 +78,4 @@ if __name__ == "__main__":
         if not AS_ok: print("[-] AS.json not present in datas")
 
         if AS_ok and hijack_ok:
-            parse_hijack.search_hijacker()
+            parse_hijack.search_hijacker(DATAS_DIR)
