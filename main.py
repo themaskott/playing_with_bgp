@@ -14,6 +14,7 @@ import argparse
 import check_datas
 import get_AS
 import get_AS_PATH
+import parse_hijack
 
 # globals
 
