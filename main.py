@@ -30,6 +30,8 @@ def getArgParser():
     group_action = argparser.add_mutually_exclusive_group()
     group_action.add_argument( "--ases", action="store_true", help="Extract and computes ASes from sources")
     group_action.add_argument( "--path", action="store_true", help="Extract and computes path anoucements from sources")
+    group_action.add_argument( "--hijack", action="store_true", help="Parse all.hijack.json for bgp hijacks")
+
 
 
     group_as = argparser.add_argument_group("AS")
@@ -52,7 +54,7 @@ if __name__ == "__main__":
     args = getArgParser().parse_args()
 
     DATAS_DIR, RESULTS_DIR = check_datas.check_directories()
-    AS_ok, AS_FR_ok, dump_ok = check_datas.check_sources(DATAS_DIR, RESULTS_DIR)
+    AS_ok, AS_FR_ok, dump_ok, hijack_ok = check_datas.check_sources(DATAS_DIR, RESULTS_DIR)
 
     if args.ases:
         if args.source == "web":
@@ -68,3 +70,11 @@ if __name__ == "__main__":
 
         if AS_ok and AS_FR_ok and dump_ok:
             get_AS_PATH.get_path( RESULTS_DIR + args.fr, RESULTS_DIR + args.all, DATAS_DIR + args.dump, RESULTS_DIR )
+
+
+    if args.hijack:
+        if not hijack_ok: print("[-] all.hijack.json not present in datas")
+        if not AS_ok: print("[-] AS.json not present in datas")
+
+        if AS_ok and hijack_ok:
+            parse_hijack.search_hijacker()
