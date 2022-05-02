@@ -31,7 +31,7 @@ def search_hijacker(datas, results):
     Determine hijacks from previously parsed suspicious annoucement
     """
 
-    conflict = parse_json_hijack(datas + "all.hijacks.json")
+    conflicts = parse_json_hijack(datas + "all.hijacks.json")
 
     with open(results + "AS.json", "r") as jf:
         AS = json.load(jf)
