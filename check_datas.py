@@ -9,4 +9,4 @@ def check_directories() -> str:
     return "datas/", "results/"
 
 def check_sources(datas:str, results:str) -> bool:
-    return path.isfile( results + "AS.json"), path.isfile( results + "AS_FR.json"), path.isfile(datas + "dump.txt"), path.isfile(datas + "all.hijack.json")
+    return path.isfile( results + "AS.json"), path.isfile( results + "AS_FR.json"), path.isfile(datas + "dump.txt"), path.isfile(datas + "all.hijacks.json")
