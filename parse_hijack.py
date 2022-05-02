@@ -39,7 +39,7 @@ def search_hijacker(datas, results):
     for c in conflicts:
         annoucer, owner = c.split(" ")
         try:
-            if AS[owner] != AS[annoucer] and not compare_ASnames(AS[owner].split(',')[0], AS[annoucer].split(',')[0]):
+            if AS[owner]['organisation'] != AS[annoucer]['organisation'] and not compare_ASnames(AS[owner]['organisation'], AS[annoucer]['organisation']):
                 print("{} ({}) has hijacked {} ({})".format(AS[annoucer], annoucer, AS[owner], owner))
         except:
             print("{} undetermined conflict with {}".format(annoucer, owner))
