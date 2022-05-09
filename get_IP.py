@@ -17,7 +17,10 @@ def get_annouced_IP( AS_file:str, source:str ):
         if IPAddress(ip).version == 4:
             annouced = p
             if annoucer in AS:
-                AS[annoucer].update({"annouced_IP":annouced})
+                if "annouced_IP" in AS[annoucer]:
+                    AS[annoucer]["annouced_IP"].append(annouced)
+                else:
+                    AS[annoucer].update({"annouced_IP":[annouced]})
 
         with open("AS.json", "w") as out:
             json.dump(AS, out)
