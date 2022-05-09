@@ -20,7 +20,7 @@ def test_inconsistency(source:str):
         if a not in annoucedAS:
             print("Alone : ",a)
 
-def load_json_file(source:str)->dic:
+def load_json_file(source:str)->dict:
     with open(source, "r") as jf:
         return json.load(jf)
 
