@@ -14,7 +14,9 @@ def get_annouced_IP( AS_file:str, source:str ):
         announcer = "AS" + announcer
         p = l.split('|')[5]
         ip = p.split('/')[0]
+        print(ip)
         if IPAddress(ip).version == 4:
+            print("ok")
             announced = p
             if announcer in AS:
                 if "announced_IP" in AS[announcer] and announced not in AS[announcer]["announced_IP"]:
