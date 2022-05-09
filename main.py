@@ -15,6 +15,7 @@ import check_datas
 import get_AS
 import get_AS_PATH
 import parse_hijack
+import get_IP
 
 # globals
 
@@ -32,11 +33,11 @@ def getArgParser():
     group_action.add_argument( "--ases", action="store_true", help="Extract and computes ASes from sources")
     group_action.add_argument( "--path", action="store_true", help="Extract and computes path anoucements from sources")
     group_action.add_argument( "--hijack", action="store_true", help="Parse all.hijack.json for bgp hijacks")
-
+    group_action.add_argument( "--ip", action="store_true", help="Complete an AS.json file with annouced prefixes")
 
 
     group_as = argparser.add_argument_group("AS")
-    group_as.add_argument( "--source", action="store", default="web", help="Source file, default from web" )
+    group_as.add_argument( "--source_as", action="store", default="web", help="Source file, default from web" )
     group_as.add_argument( "--format", action="store", default="json", help="Output format json or csv, default json" )
     group_as.add_argument( "--only-fr", action="store_true", default=False, help="Extract only french ASes, default all" )
 
@@ -46,9 +47,12 @@ def getArgParser():
     group_path.add_argument( "--dump", action="store", default="datas/dump.txt", help="Bview dump file, default dump.txt" )
 
 
-    group_path = argparser.add_argument_group("HIJACK")
-    group_as.add_argument( "--source_hjk", action="store", default="datas/all.hijacks.json", help="Source file, all.hijacks.json" )
-    group_path.add_argument( "--all_as", action="store", default="results/AS.json", help="All ASes file, default AS.json" )
+    group_hjk = argparser.add_argument_group("HIJACK")
+    group_hjk.add_argument( "--source_hjk", action="store", default="datas/all.hijacks.json", help="Source file, all.hijacks.json" )
+    group_hjk.add_argument( "--all_as", action="store", default="results/AS.json", help="All ASes file, default AS.json" )
+
+    group_ip = argparser.add_argument_group("IP")
+    group_ip.add_argument( "--source_ip", action="store", default="datas/dump.txt", help="Bview dump file, default dump.txt" )
 
     argparser.add_argument( "--version", action="version", version="%(prog)s beta")
 
@@ -63,7 +67,7 @@ if __name__ == "__main__":
 
 
     if args.ases:
-        if args.source == "web":
+        if args.source_as == "web":
             get_AS.extract_AS( get_AS.update_AS(), args.format, args.only_fr, RESULTS_DIR )
         else:
             if check_datas.check_sources_ases( args.source ):
@@ -88,3 +92,7 @@ if __name__ == "__main__":
 
         if AS_ok and hijack_ok:
             parse_hijack.search_hijacker(DATAS_DIR, RESULTS_DIR)
+
+
+    if args.ip:
+        get_IP.get_annouced_IP( "results/AS.json", args.source_ip )
