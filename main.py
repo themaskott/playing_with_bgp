@@ -77,8 +77,8 @@ if __name__ == "__main__":
 
     if args.path:
         AS_ok, AS_FR_ok, dump_ok, = check_datas.check_sources_path( args.fr, args.all, args.dump )
-        if not AS_ok: print("[-] AS.json not present in results")
-        if not AS_FR_ok: print("[-] AS_FR.json not present in results")
+        if not AS_ok: print("[-] AS.json not present in results, please generate it using --ases")
+        if not AS_FR_ok: print("[-] AS_FR.json not present in results, please generate it using --ases")
         if not dump_ok: print("[-] dump.txt not present in datas")
 
         if AS_ok and AS_FR_ok and dump_ok:
@@ -88,11 +88,16 @@ if __name__ == "__main__":
     if args.hijack:
         hijack_ok, AS_ok = check_datas.check_sources_hijack( args.source_hjk, args.all_as )
         if not hijack_ok: print("[-] all.hijack.json not present in datas")
-        if not AS_ok: print("[-] AS.json not present in datas")
+        if not AS_ok: print("[-] AS.json not present in results, please generate it using --ases")
 
         if AS_ok and hijack_ok:
             parse_hijack.search_hijacker(DATAS_DIR, RESULTS_DIR)
 
 
     if args.ip:
-        get_IP.get_annouced_IP( "results/AS.json", args.source_ip )
+        AS_ok, dump_ok = check_datas.check_sources_ip( args.source_ip )
+        if not dump_ok: print("[-] dump.txt not present in datas")
+        if not AS_ok: print("[-] AS.json not present in results, please generate it using --ases")
+
+        if AS_ok and dump_ok:
+            get_IP.get_annouced_IP( "results/AS.json", args.source_ip )

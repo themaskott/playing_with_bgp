@@ -22,5 +22,5 @@ def get_annouced_IP( AS_file:str, source:str ):
                 else:
                     AS[announcer].update({"announced_IP":[announced]})
 
-    with open("datas/AS.json", "w") as out:
+    with open("results/AS.json", "w") as out:
         json.dump(AS, out)

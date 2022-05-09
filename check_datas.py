@@ -20,3 +20,6 @@ def check_sources_path(fr:str, all:str, dump:str) -> bool:
 
 def check_sources_hijack(source:str, all:str ) -> bool:
     return path.isfile( source ), path.isfile( all )
+
+def check_sources_path( dump:str) -> bool:
+    return path.isfile( results + "AS.json"), path.isfile( dump )
