@@ -38,6 +38,12 @@ List of AS numbers associated with organisation and originated country.
 Can be obtain at :https://www.cidr-report.org/as2.0/autnums.html
 The script can also get that page from himself.
 
+
+### 3 - `all.hijacks.json`
+
+Json file produced by the tool TaBi (see bottom links).
+
+
 ## Output files (ie results/)
 
 ### 1 - `AS.json` and `AS_FR.json`
@@ -77,8 +83,7 @@ Links between French ASes and other ASes.
 ## Some features
 
 ```
-usage: main.py [-h] [--ases | --path] [--source SOURCE] [--format FORMAT] [--only-fr] [--fr FR] [--all ALL]
-               [--dump DUMP] [--version]
+usage: main.py [-h] [--ases | --path | --hijack] [--source SOURCE] [--format FORMAT] [--only-fr] [--fr FR] [--all ALL] [--dump DUMP] [--version]
 
 Some tools to play with BGP and ASes
 
@@ -86,6 +91,7 @@ optional arguments:
   -h, --help       show this help message and exit
   --ases           Extract and computes ASes from sources
   --path           Extract and computes path anoucements from sources
+  --hijack         Parse all.hijack.json for bgp hijacks
   --version        show program's version number and exit
 
 AS:
@@ -97,20 +103,23 @@ PATH:
   --fr FR          French ASes file
   --all ALL        All ASes file
   --dump DUMP      Bview dump file
+
   ```
 
   `--ases` : produce `AS[_FR].json` files (or csv if asked)
 
   `--path` : parse AS path in `dump.txt` and produce `links_AS_fr.csv`, both previous json files are needed.
 
+  `--hijack` : parse all.hijacks.json and try to reduce false positive hijack detections
+
   ## Useful tools and links
 
   `ANSSI - mabo` : https://github.com/ANSSI-FR/mabo
-  
+
   `ANSSI - tabi` : https://github.com/ANSSI-FR/tabi
 
   BGP full view and update from RRC01 colectors : https://data.ris.ripe.net/rrc01/
 
-  ASes restration names : https://www.cidr-report.org/as2.0/autnums.html
+  ASes registration names : https://www.cidr-report.org/as2.0/autnums.html
 
   Hurricane Toolkit : https://bgp.he.net/
