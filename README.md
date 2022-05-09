@@ -83,26 +83,32 @@ Links between French ASes and other ASes.
 ## Some features
 
 ```
-usage: main.py [-h] [--ases | --path | --hijack] [--source SOURCE] [--format FORMAT] [--only-fr] [--fr FR] [--all ALL] [--dump DUMP] [--version]
+usage: main.py [-h] [--ases | --path | --hijack] [--source SOURCE] [--format FORMAT] [--only-fr] [--fr FR] [--all ALL] [--dump DUMP] [--source_hjk SOURCE_HJK] [--all_as ALL_AS] [--version]
 
 Some tools to play with BGP and ASes
 
 optional arguments:
-  -h, --help       show this help message and exit
-  --ases           Extract and computes ASes from sources
-  --path           Extract and computes path anoucements from sources
-  --hijack         Parse all.hijack.json for bgp hijacks
-  --version        show program's version number and exit
+  -h, --help            show this help message and exit
+  --ases                Extract and computes ASes from sources
+  --path                Extract and computes path anoucements from sources
+  --hijack              Parse all.hijack.json for bgp hijacks
+  --version             show program's version number and exit
 
 AS:
-  --source SOURCE  Source file
-  --format FORMAT  Output format json or csv
-  --only-fr        Extract only french ASes
+  --source SOURCE       Source file, default from web
+  --format FORMAT       Output format json or csv, default json
+  --only-fr             Extract only french ASes, default all
+  --source_hjk SOURCE_HJK
+                        Source file, all.hijacks.json
 
 PATH:
-  --fr FR          French ASes file
-  --all ALL        All ASes file
-  --dump DUMP      Bview dump file
+  --fr FR               French ASes file, default AS_FR.json
+  --all ALL             All ASes file, default AS.json
+  --dump DUMP           Bview dump file, default dump.txt
+
+HIJACK:
+  --all_as ALL_AS       All ASes file, default AS.json
+
 
   ```
 
