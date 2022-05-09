@@ -118,6 +118,8 @@ HIJACK:
 
   `--hijack` : parse all.hijacks.json and try to reduce false positive hijack detections
 
+  `--ip` : update existing AS.json with IPv4 prefixes announced in a bview dump file (dump.txt)
+
   ## Useful tools and links
 
   `ANSSI - mabo` : https://github.com/ANSSI-FR/mabo
