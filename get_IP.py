@@ -1,7 +1,7 @@
 import json
 import typing
 from get_AS_PATH import load_json_file
-from netaddr import IPAdress
+from netaddr import IPAddress
 
 
 def get_annouced_IP( AS_file:str, source:str ):
