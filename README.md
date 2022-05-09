@@ -83,7 +83,8 @@ Links between French ASes and other ASes.
 ## Some features
 
 ```
-usage: main.py [-h] [--ases | --path | --hijack] [--source SOURCE] [--format FORMAT] [--only-fr] [--fr FR] [--all ALL] [--dump DUMP] [--source_hjk SOURCE_HJK] [--all_as ALL_AS] [--version]
+usage: main.py [-h] [--ases | --path | --hijack | --ip] [--source_as SOURCE_AS] [--format FORMAT] [--only-fr] [--fr FR] [--all ALL] [--dump DUMP] [--source_hjk SOURCE_HJK] [--all_as ALL_AS]
+               [--source_ip SOURCE_IP] [--version]
 
 Some tools to play with BGP and ASes
 
@@ -92,14 +93,14 @@ optional arguments:
   --ases                Extract and computes ASes from sources
   --path                Extract and computes path anoucements from sources
   --hijack              Parse all.hijack.json for bgp hijacks
+  --ip                  Complete an AS.json file with annouced prefixes
   --version             show program's version number and exit
 
 AS:
-  --source SOURCE       Source file, default from web
+  --source_as SOURCE_AS
+                        Source file, default from web
   --format FORMAT       Output format json or csv, default json
   --only-fr             Extract only french ASes, default all
-  --source_hjk SOURCE_HJK
-                        Source file, all.hijacks.json
 
 PATH:
   --fr FR               French ASes file, default AS_FR.json
@@ -107,9 +108,13 @@ PATH:
   --dump DUMP           Bview dump file, default dump.txt
 
 HIJACK:
+  --source_hjk SOURCE_HJK
+                        Source file, all.hijacks.json
   --all_as ALL_AS       All ASes file, default AS.json
 
-
+IP:
+  --source_ip SOURCE_IP
+                        Bview dump file, default dump.txt
   ```
 
   `--ases` : produce `AS[_FR].json` files (or csv if asked)
