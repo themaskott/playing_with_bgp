@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
 
     if args.hijack:
-        hijack_ok, AS_OK = check_datas.check_sources_hijack( args.source_hjk, args.all_as )
+        hijack_ok, AS_ok = check_datas.check_sources_hijack( args.source_hjk, args.all_as )
         if not hijack_ok: print("[-] all.hijack.json not present in datas")
         if not AS_ok: print("[-] AS.json not present in datas")
 
