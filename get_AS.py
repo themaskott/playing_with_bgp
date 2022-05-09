@@ -1,5 +1,6 @@
 import sys, requests, json
 from html.parser import HTMLParser
+import typing
 
 class MyHTMLParser(HTMLParser):
     """
@@ -35,7 +36,7 @@ class MyHTMLParser(HTMLParser):
                 self.AS.update({self.ASNum : {"organisation" : self.ASName, "country" : self.ASCountry}})
             self.isASName = False
 
-def update_AS():
+def update_AS()->str:
     """
     Get last update of AS number - AS names
     """
@@ -44,7 +45,7 @@ def update_AS():
     return r.content.decode()
 
 
-def extract_AS(source, output_format, extract_only_fr, out_dir):
+def extract_AS(source:str, output_format:str, extract_only_fr:bool, out_dir:str):
     """
     Apply parser to input
     Output is a json or cvs

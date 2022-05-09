@@ -2,7 +2,7 @@
 
 import json, sys, re
 
-def compare_ASnames(AS1, AS2):
+def compare_ASnames(AS1:str, AS2:str)->bool:
     """
     Search for common word in two AS names
     Reduce false positives
@@ -13,7 +13,7 @@ def compare_ASnames(AS1, AS2):
         if len(word) > 2 and word in list2: return True
     return False
 
-def parse_json_hijack(all_hijack_json):
+def parse_json_hijack(all_hijack_json:str)->set:
     """
     Parse the all.hijacks.json output of mabo tool
     Extract owner AS and annoucer AS (possible hijacker)
@@ -26,7 +26,7 @@ def parse_json_hijack(all_hijack_json):
                 conflicts.add("AS" + str(data["announce"]["asn"]) + " " + "AS" + str(data["asn"]))
     return conflicts
 
-def search_hijacker(datas, results):
+def search_hijacker(datas:str, results:str):
     """
     Determine hijacks from previously parsed suspicious annoucement
     """

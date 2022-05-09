@@ -1,10 +1,11 @@
 import sys, json
+import typing
 
 AS_fr = {}
 AS = {}
 neighbor = {}
 
-def test_inconsistency(source):
+def test_inconsistency(source:str):
     annoucedAS = set()
     annoucerAS = set()
     for line in open(source, "r"):
@@ -19,12 +20,12 @@ def test_inconsistency(source):
         if a not in annoucedAS:
             print("Alone : ",a)
 
-def load_json_file(source):
+def load_json_file(source:str)->dic:
     with open(source, "r") as jf:
         return json.load(jf)
 
 
-def check_neighbor(l):
+def check_neighbor(l:str):
     AS1, AS2 = l.split(' ')
     if AS1 in AS_fr and AS2 not in AS_fr:
         country = AS[AS2]['country']
@@ -39,7 +40,7 @@ def check_neighbor(l):
         else:
             neighbor.update({country:1})
 
-def get_path(AS_FR_file, AS_file, source, out_dir):
+def get_path(AS_FR_file:str, AS_file:str, source:str, out_dir:str):
 
     global AS, AS_fr, neighbor
 
