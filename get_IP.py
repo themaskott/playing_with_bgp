@@ -14,7 +14,7 @@ def get_annouced_IP( AS_file:str, source:str ):
         annoucer = "AS" + annoucer
         p = l.split('|')[5]
         ip = p.split('/')[0]
-        if IPAdress(ip).version == 4:
+        if IPAddress(ip).version == 4:
             annouced = p
             if annoucer in AS:
                 AS[annoucer].update({"annouced_IP":annouced})
