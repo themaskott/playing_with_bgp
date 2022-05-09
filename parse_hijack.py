@@ -1,6 +1,6 @@
 #/usr/bin/python3
 
-import json, sys, re
+import json, re
 
 def compare_ASnames(AS1:str, AS2:str)->bool:
     """

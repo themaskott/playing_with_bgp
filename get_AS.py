@@ -1,11 +1,11 @@
-import sys, requests, json
+import requests, json
 from html.parser import HTMLParser
 import typing
 
 class MyHTMLParser(HTMLParser):
     """
     HTML parser for https://www.cidr-report.org/as2.0/autnums.html
-    Feeds AS dictionnary with {AS number : AS full name}
+    Feeds AS dictionnary with {AS number : { "organisation" : AS full name, "country" : AS country }}
     """
     extract_only_fr = False
     isASNum = False

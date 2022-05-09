@@ -1,4 +1,4 @@
-import sys, json
+import json
 import typing
 
 AS_fr = {}
