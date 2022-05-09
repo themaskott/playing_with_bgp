@@ -10,3 +10,13 @@ def check_directories() -> str:
 
 def check_sources(datas:str, results:str) -> bool:
     return path.isfile( results + "AS.json"), path.isfile( results + "AS_FR.json"), path.isfile(datas + "dump.txt"), path.isfile(datas + "all.hijacks.json")
+
+def check_sources_ases(source:str)->bool:
+    return path.isfile( source )
+
+
+def check_sources_path(fr:str, all:str, dump:str) -> bool:
+    return path.isfile( fr ), path.isfile( all ), path.isfile( dump )
+
+def check_sources_hijack(source:str, all:str ) -> bool:
+    return path.isfile( source ), path.isfile( all )

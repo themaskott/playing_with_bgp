@@ -36,14 +36,19 @@ def getArgParser():
 
 
     group_as = argparser.add_argument_group("AS")
-    group_as.add_argument( "--source", action="store", default="web", help="Source file" )
-    group_as.add_argument( "--format", action="store", default="json", help="Output format json or csv" )
-    group_as.add_argument( "--only-fr", action="store_true", default=False, help="Extract only french ASes" )
+    group_as.add_argument( "--source", action="store", default="web", help="Source file, default from web" )
+    group_as.add_argument( "--format", action="store", default="json", help="Output format json or csv, default json" )
+    group_as.add_argument( "--only-fr", action="store_true", default=False, help="Extract only french ASes, default all" )
 
     group_path = argparser.add_argument_group("PATH")
-    group_path.add_argument( "--fr", action="store", default="AS_FR.json", help="French ASes file" )
-    group_path.add_argument( "--all", action="store", default="AS.json", help="All ASes file" )
-    group_path.add_argument( "--dump", action="store", default="dump.txt", help="Bview dump file" )
+    group_path.add_argument( "--fr", action="store", default="results/AS_FR.json", help="French ASes file, default AS_FR.json" )
+    group_path.add_argument( "--all", action="store", default="results/AS.json", help="All ASes file, default AS.json" )
+    group_path.add_argument( "--dump", action="store", default="datas/dump.txt", help="Bview dump file, default dump.txt" )
+
+
+    group_path = argparser.add_argument_group("HIJACK")
+    group_as.add_argument( "--source", action="store", default="datas/all.hijacks.json", help="Source file, all.hijacks.json" )
+    group_path.add_argument( "--all", action="store", default="results/AS.json", help="All ASes file, default AS.json" )
 
     argparser.add_argument( "--version", action="version", version="%(prog)s beta")
 
@@ -55,18 +60,21 @@ if __name__ == "__main__":
     args = getArgParser().parse_args()
 
     DATAS_DIR, RESULTS_DIR = check_datas.check_directories()
-    AS_ok, AS_FR_ok, dump_ok, hijack_ok = check_datas.check_sources(DATAS_DIR, RESULTS_DIR)
+
 
     if args.ases:
         if args.source == "web":
             get_AS.extract_AS( get_AS.update_AS(), args.format, args.only_fr, RESULTS_DIR )
         else:
-            get_AS.extract_AS( open(args.source).read(), args.format, args.only_fr, RESULTS_DIR )
-
+            if check_datas.check_sources_ases( args.source ):
+                get_AS.extract_AS( open(args.source).read(), args.format, args.only_fr, RESULTS_DIR )
+            else:
+                print(f"[-] {args.source} not present")
 
     if args.path:
-        if not AS_ok: print("[-] AS.json not present in datas")
-        if not AS_FR_ok: print("[-] AS_FR.json not present in datas")
+        AS_ok, AS_FR_ok, dump_ok, = check_datas.check_sources_path( args.fr, args.all, args.dump )
+        if not AS_ok: print("[-] AS.json not present in results")
+        if not AS_FR_ok: print("[-] AS_FR.json not present in results")
         if not dump_ok: print("[-] dump.txt not present in datas")
 
         if AS_ok and AS_FR_ok and dump_ok:
@@ -74,6 +82,7 @@ if __name__ == "__main__":
 
 
     if args.hijack:
+        hijack_ok, AS_OK = check_datas.check_sources_hijack( args.source, args.all )
         if not hijack_ok: print("[-] all.hijack.json not present in datas")
         if not AS_ok: print("[-] AS.json not present in datas")
 
