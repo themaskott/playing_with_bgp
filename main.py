@@ -47,8 +47,8 @@ def getArgParser():
 
 
     group_path = argparser.add_argument_group("HIJACK")
-    group_as.add_argument( "--source", action="store", default="datas/all.hijacks.json", help="Source file, all.hijacks.json" )
-    group_path.add_argument( "--all", action="store", default="results/AS.json", help="All ASes file, default AS.json" )
+    group_as.add_argument( "--source_hjk", action="store", default="datas/all.hijacks.json", help="Source file, all.hijacks.json" )
+    group_path.add_argument( "--all_as", action="store", default="results/AS.json", help="All ASes file, default AS.json" )
 
     argparser.add_argument( "--version", action="version", version="%(prog)s beta")
 
@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
 
     if args.hijack:
-        hijack_ok, AS_OK = check_datas.check_sources_hijack( args.source, args.all )
+        hijack_ok, AS_OK = check_datas.check_sources_hijack( args.source_hjk, args.all_as )
         if not hijack_ok: print("[-] all.hijack.json not present in datas")
         if not AS_ok: print("[-] AS.json not present in datas")
 
