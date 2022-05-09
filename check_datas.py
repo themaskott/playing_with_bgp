@@ -8,9 +8,6 @@ def check_directories() -> str:
     if not path.isdir("results"): mkdir("results", 0o755)
     return "datas/", "results/"
 
-def check_sources(datas:str, results:str) -> bool:
-    return path.isfile( results + "AS.json"), path.isfile( results + "AS_FR.json"), path.isfile(datas + "dump.txt"), path.isfile(datas + "all.hijacks.json")
-
 def check_sources_ases(source:str)->bool:
     return path.isfile( source )
 
@@ -22,4 +19,4 @@ def check_sources_hijack(source:str, all:str ) -> bool:
     return path.isfile( source ), path.isfile( all )
 
 def check_sources_ip( dump:str) -> bool:
-    return path.isfile( results + "AS.json"), path.isfile( dump )
+    return path.isfile( "results/AS.json"), path.isfile( dump )
