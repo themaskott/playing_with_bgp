@@ -21,6 +21,7 @@ def get_annouced_IP( AS_file:str, source:str ):
             if announcer in AS:
                 if "announced_IP" in AS[announcer] and announced not in AS[announcer]["announced_IP"]:
                     AS[announcer]["announced_IP"].append(announced)
+                    print(AS[announcer])
                 else:
                     AS[announcer].update({"announced_IP":[announced]})
 
