@@ -82,7 +82,7 @@ if __name__ == "__main__":
         if not dump_ok: print("[-] dump.txt not present in datas")
 
         if AS_ok and AS_FR_ok and dump_ok:
-            get_AS_PATH.get_path( RESULTS_DIR + args.fr, RESULTS_DIR + args.all, DATAS_DIR + args.dump, RESULTS_DIR )
+            get_AS_PATH.get_path( args.fr, args.all, args.dump, RESULTS_DIR )
 
 
     if args.hijack:
