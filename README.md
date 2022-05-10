@@ -157,8 +157,9 @@ Trick for running `tabi` :
 TABI="/full/path/to/taby/inside/python2env/tabi_env/bin/tabi"
 export MABO_PATH="/full/path/to/mabo/mabo"
 ```
-
 `mabi` takes around 25 minutes with 6 cores to parse bview.
+
+At the end of the parsing, `tabi` crashes, but output files are OK.
 
 
 - With `bgpdump`
@@ -178,7 +179,7 @@ Can also be obtain thanks to `mabo`, using the`--legacy` output, but so far test
 
 Will take `autnums.html` as an input to generate `AS.json`
 
-`playing_with_bgp.py --ases --fr`
+`playing_with_bgp.py --ases --only-fr`
 
 Will take `autnums.html` as an input to generate `AS_FR.json`
 
