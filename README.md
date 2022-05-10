@@ -151,6 +151,16 @@ Will produce following files into the datas directory :
     - all.routes.json.gz that contains all routes monitored
     - all.hijacks.json.gz that contains all BGP prefix conflicts
 
+Trick for running `tabi` :
+```bash
+#!/usr/bin/sh
+TABI="/full/path/to/taby/inside/python2env/tabi_env/bin/tabi"
+export MABO_PATH="/full/path/to/mabo/mabo"
+```
+
+`mabi` takes around 25 minutes with 6 cores to parse bview.
+
+
 - With `bgpdump`
 
 `bgpdump -M -O datas/dump.txt datas/bview.20220406.0800.gz`
@@ -166,24 +176,24 @@ Can also be obtain thanks to `mabo`, using the`--legacy` output, but so far test
 
 `playing_with_bgp.py --ases`
 
-Will took `autnums.html` as an input to generate `AS.json`
+Will take `autnums.html` as an input to generate `AS.json`
 
 `playing_with_bgp.py --ases --fr`
 
-Will took `autnums.html` as an input to generate `AS_FR.json`
+Will take `autnums.html` as an input to generate `AS_FR.json`
 
 
 - `links_AS_fr.csv`
 
 `playing_with_bgp.py --path`
 
-Will took `AS.json`, `AS_FR.json` and `dump.txt` to generate csv file of links between any French AS and foreign AS.
+Will take `AS.json`, `AS_FR.json` and `dump.txt` to generate csv file of links between any French AS and foreign AS.
 
 - Complete `AS.json`
 
 `playing_with_bgp.py --ip`
 
-Will took dump.txt and AS.json, to produce a new AS.json including annouced prefixes per AS.
+Will take dump.txt and AS.json, to produce a new AS.json including annouced prefixes per AS.
 
 **Caution** : those prefixes are from a bview dump, so it reveals real annoucements and no who is the legitimate owner of a prefix.
 

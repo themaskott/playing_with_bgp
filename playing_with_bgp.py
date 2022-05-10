@@ -70,8 +70,8 @@ if __name__ == "__main__":
         if args.source_as == "web":
             get_AS.extract_AS( get_AS.update_AS(), args.format, args.only_fr, RESULTS_DIR )
         else:
-            if check_datas.check_sources_ases( args.source ):
-                get_AS.extract_AS( open(args.source).read(), args.format, args.only_fr, RESULTS_DIR )
+            if check_datas.check_sources_ases( args.source_as ):
+                get_AS.extract_AS( open(args.source_as ).read(), args.format, args.only_fr, RESULTS_DIR )
             else:
                 print(f"[-] {args.source} not present")
 
