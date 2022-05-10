@@ -1,5 +1,11 @@
 ## PLAYING WITH BGP
 
+
+<p align="center">
+  <img src="img/meme.jpg" />
+</p>
+
+
 Regroup some tools and scripts to manipulate extracted datas from the Internet and BGP annoucement.
 Main goal is to generate formated outputs to be used elsewhere.
 
@@ -83,7 +89,7 @@ Links between French ASes and other ASes.
 ## Some features
 
 ```
-usage: main.py [-h] [--ases | --path | --hijack | --ip] [--source_as SOURCE_AS] [--format FORMAT] [--only-fr] [--fr FR] [--all ALL] [--dump DUMP] [--source_hjk SOURCE_HJK] [--all_as ALL_AS]
+usage: playing_with_bgp.py [-h] [--ases | --path | --hijack | --ip] [--source_as SOURCE_AS] [--format FORMAT] [--only-fr] [--fr FR] [--all ALL] [--dump DUMP] [--source_hjk SOURCE_HJK] [--all_as ALL_AS]
                [--source_ip SOURCE_IP] [--version]
 
 Some tools to play with BGP and ASes
@@ -152,6 +158,36 @@ Will produce following files into the datas directory :
 Will produce the `dump.txt` file into the right format.
 
 Can also be obtain thanks to `mabo`, using the`--legacy` output, but so far tests were slowers.
+
+
+#### 3 - Generate needed files
+
+- `AS.json` and `AS_FR.json`
+
+`playing_with_bgp.py --ases`
+
+Will took `autnums.html` as an input to generate `AS.json`
+
+`playing_with_bgp.py --ases --fr`
+
+Will took `autnums.html` as an input to generate `AS_FR.json`
+
+
+- `links_AS_fr.csv`
+
+`playing_with_bgp.py --path`
+
+Will took `AS.json`, `AS_FR.json` and `dump.txt` to generate csv file of links between any French AS and foreign AS.
+
+- Complete `AS.json`
+
+`playing_with_bgp.py --ip`
+
+Will took dump.txt and AS.json, to produce a new AS.json including annouced prefixes per AS.
+
+**Caution** : those prefixes are from a bview dump, so it reveals real annoucements and no who is the legitimate owner of a prefix.
+
+
 
 
   ## Useful tools and links
