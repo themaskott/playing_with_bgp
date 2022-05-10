@@ -125,11 +125,42 @@ IP:
 
   `--ip` : update existing AS.json with IPv4 prefixes announced in a bview dump file (dump.txt)
 
+
+  ## Work Flow
+
+  #### 1 - Collecting datas
+
+- Download BGP full view ( `bview.YYYYMMDD.hhmm.gz` ) from the deisred colector, and needed updates
+- Download AS list from https://www.cidr-report.org/as2.0/autnums.html (or the script can retrieve it from itself)
+
+  #### 2 - Extract datas
+
+- With `tabi` :
+
+`tabi -j 8 rrc01 datas/ bview.20160101.0000.gz updates.20160101.0000.gz`
+
+Will produce following files into the datas directory :
+
+    - all.defaults.json.gz that contains all default routes seen by TaBi
+    - all.routes.json.gz that contains all routes monitored
+    - all.hijacks.json.gz that contains all BGP prefix conflicts
+
+- With `bgpdump`
+
+`bgpdump -M -O datas/dump.txt datas/bview.20220406.0800.gz`
+
+Will produce the `dump.txt` file into the right format.
+
+Can also be obtain thanks to `mabo`, using the`--legacy` output, but so far tests were slowers.
+
+
   ## Useful tools and links
 
   `ANSSI - mabo` : https://github.com/ANSSI-FR/mabo
 
   `ANSSI - tabi` : https://github.com/ANSSI-FR/tabi
+
+  `bgpdump` : https://github.com/RIPE-NCC/bgpdump
 
   BGP full view and update from RRC01 colectors : https://data.ris.ripe.net/rrc01/
 
