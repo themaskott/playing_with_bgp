@@ -27,13 +27,13 @@ def load_json_file(source:str)->dict:
 
 def check_neighbor(l:str):
     AS1, AS2 = l.split(' ')
-    if AS1 in AS_fr and AS2 not in AS_fr:
+    if AS1 in AS_fr and AS2 not in AS_fr and AS2 in AS:
         country = AS[AS2]['country']
         if country in neighbor:
             neighbor[country] += 1
         else:
             neighbor.update({country:1})
-    elif AS2 in AS_fr and AS1 not in AS_fr:
+    elif AS2 in AS_fr and AS1 not in AS_fr and AS1 in AS:
         country = AS[AS1]['country']
         if country in neighbor:
             neighbor[country] += 1
