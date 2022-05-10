@@ -1,4 +1,4 @@
-## PLAYING WITH BGP
+# PLAYING WITH BGP
 
 
 <p align="center">
@@ -14,7 +14,7 @@ For now still in progress so do not expect much.
 
 ## Files used as inputs (ie datas/)
 
-### 1 - `dump.txt`
+#### 1 - `dump.txt`
 
 Human readable output of a parsed bview thanks to bgpdump (https://github.com/RIPE-NCC/bgpdump)
 
@@ -38,21 +38,21 @@ TABLE_DUMP2|04/06/22 08:00:00|B|2001:7f8:4::3:2be1:1|207841|fddd:1194:1194:1194:
 
 ```
 
-### 2 -`autnums.html`
+#### 2 -`autnums.html`
 
 List of AS numbers associated with organisation and originated country.
 Can be obtain at :https://www.cidr-report.org/as2.0/autnums.html
 The script can also get that page from himself.
 
 
-### 3 - `all.hijacks.json`
+#### 3 - `all.hijacks.json`
 
 Json file produced by the tool TaBi (see bottom links).
 
 
 ## Output files (ie results/)
 
-### 1 - `AS.json` and `AS_FR.json`
+#### 1 - `AS.json` and `AS_FR.json`
 
 A json formated file generated from the fromer `autnums.html`. Can be generated in a `csv` format too.
 `AS_FR.json` is the same one but containing only French ASes.
@@ -82,7 +82,7 @@ cat AS.json | jq | head -n 21
   },
   ```
 
-### 2 - `links_AS_fr.csv`
+#### 2 - `links_AS_fr.csv`
 
 Links between French ASes and other ASes.
 
@@ -132,14 +132,14 @@ IP:
   `--ip` : update existing AS.json with IPv4 prefixes announced in a bview dump file (dump.txt)
 
 
-  ## Work Flow
+## Work Flow
 
-  #### 1 - Collecting datas
+#### 1 - Collecting datas
 
 - Download BGP full view ( `bview.YYYYMMDD.hhmm.gz` ) from the deisred colector, and needed updates
 - Download AS list from https://www.cidr-report.org/as2.0/autnums.html (or the script can retrieve it from itself)
 
-  #### 2 - Extract datas
+#### 2 - Extract datas
 
 - With `tabi` :
 
@@ -189,8 +189,7 @@ Will took dump.txt and AS.json, to produce a new AS.json including annouced pref
 
 
 
-
-  ## Useful tools and links
+## Useful tools and links
 
   `ANSSI - mabo` : https://github.com/ANSSI-FR/mabo
 
