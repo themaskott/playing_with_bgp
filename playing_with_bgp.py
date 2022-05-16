@@ -92,7 +92,7 @@ if __name__ == "__main__":
 
         if AS_ok and hijack_ok:
             parse_hijack.search_hijacker(DATAS_DIR, RESULTS_DIR)
-            search_annouces.search_inconsistancies( args.all_as )
+            search_announces.search_inconsistancies( args.all_as )
 
 
     if args.ip:
