@@ -7,15 +7,21 @@ import sys
 from itertools import combinations
 from string import ascii_lowercase
 
-def load_df(source):
+def load_df(source:str)->pd.DataFrame:
+    """
+    Read AS.json file under the format {'ASxxx':{'organisation':'org_name', 'country':'YY', 'announced_IP':['x.x.x.x/x', 'y.y.y.y/y'] }}
+    And return a DataFrame
+    """
     df = pd.read_json(source, orient="index")
     df = df.rename_axis("AS").reset_index(level=0)
 
     return df
 
 
-def unmerge_df(df):
-
+def unmerge_df(df:pd.DataFrame)->pd.DataFrame:
+    """
+    Parse previous DataFrame to compute a new one by unmerging prefixes from the 'announced_IP' column
+    """
     df2 = pd.DataFrame(columns = ['AS','prefix'])
     for i in range(len(df)):
         if isinstance(df.loc[i]["announced_IP"], list):
@@ -25,8 +31,12 @@ def unmerge_df(df):
     return df2
 
 
-def draw_graph(df):
-
+def draw_graph(df:pd.DataFrame)->ig.Graph:
+    """
+    Compute a graph from unmerged DataFrame
+    Vertices are either AS or prefixes
+    Links are between AS and prefixes announced by the AS
+    """
     g = ig.Graph.DataFrame(df, directed=False, use_vids=False)
 
     return g
@@ -34,10 +44,17 @@ def draw_graph(df):
 
 
 def scoring(s1: list[str], s2: list[str]) -> float:
+    """
+    Null score between s1 and s1 means the two lists does not have common word
+    """
     set1, set2 = set(s1), set(s2)
     return len(set1 & set2) / len(set1 | set2)
 
-def compare_org_names(names):
+def compare_org_names(names:list)->dict:
+    """
+    Compute scores for each couple of organisation names
+    """
+
     names = [[_ for _ in re.split(' |-|_', name)] for name in names]
     tagged_names = dict(zip(ascii_lowercase, names))
 
@@ -48,7 +65,7 @@ def compare_org_names(names):
 
     return scores
 
-def check_scores(scores):
+def check_scores(scores:dict)->bool:
     res = False
     for s in scores.values():
         if s <=  0.1:
@@ -56,6 +73,10 @@ def check_scores(scores):
     return res
 
 def search_inconsistancies(source):
+    """
+    Parse the graph of AS-prefixes to find prefixes announced by two or more ASes (case of MOAS)
+    Then attempt to reduce false positives by checking ASes owner'names
+    """
 
     df = load_df(source)
     df2 = unmerge_df(df)
