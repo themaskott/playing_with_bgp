@@ -16,7 +16,7 @@ import get_AS
 import get_AS_PATH
 import parse_hijack
 import get_IP
-
+import search_annouces
 # globals
 
 DATAS_DIR = ""
@@ -92,6 +92,7 @@ if __name__ == "__main__":
 
         if AS_ok and hijack_ok:
             parse_hijack.search_hijacker(DATAS_DIR, RESULTS_DIR)
+            search_annouces.search_inconsistancies( args.all_as )
 
 
     if args.ip:
