@@ -16,7 +16,7 @@ import get_AS
 import get_AS_PATH
 import parse_hijack
 import get_IP
-import search_annouces
+import search_announces
 # globals
 
 DATAS_DIR = ""
