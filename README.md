@@ -127,7 +127,8 @@ IP:
 
   `--path` : parse AS path in `dump.txt` and produce `links_AS_fr.csv`, both previous json files are needed.
 
-  `--hijack` : parse all.hijacks.json and try to reduce false positive hijack detections
+  `--hijack` : parse all.hijacks.json and try to reduce false positive hijack detections (using parse_hijack.py)
+              search for Multiple Origin AS (MOAS) prefixes (using search_annouces.py)
 
   `--ip` : update existing AS.json with IPv4 prefixes announced in a bview dump file (dump.txt)
 
