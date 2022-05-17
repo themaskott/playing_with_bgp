@@ -6,26 +6,35 @@ AS = {}
 neighbor = {}
 
 def test_inconsistency(source:str):
-    annoucedAS = set()
-    annoucerAS = set()
+    """
+    Check for errors in dump.txt file
+    """
+    announcedAS = set()
+    announcerAS = set()
     for line in open(source, "r"):
         AS = line.split("|")[4]
         ASpath = line.split("|")[6]
         if AS != ASpath.split(" ")[0]:
-            print("Wrong annouce : ",AS, ASpath)
-        annoucedAS.update( _ for _ in ASpath.split(" "))
-        annoucerAS.update(AS)
+            print("Wrong announce : ",AS, ASpath)
+        announcedAS.update( _ for _ in ASpath.split(" "))
+        announcerAS.update(AS)
 
-    for a in annoucerAS:
-        if a not in annoucedAS:
+    for a in announcerAS:
+        if a not in announcedAS:
             print("Alone : ",a)
 
 def load_json_file(source:str)->dict:
+    """
+    Load a json file into a dict
+    """
     with open(source, "r") as jf:
         return json.load(jf)
 
 
 def check_neighbor(l:str):
+    """
+    Count nationalities of french ASes
+    """
     AS1, AS2 = l.split(' ')
     if AS1 in AS_fr and AS2 not in AS_fr and AS2 in AS:
         country = AS[AS2]['country']
@@ -41,7 +50,10 @@ def check_neighbor(l:str):
             neighbor.update({country:1})
 
 def get_path(AS_FR_file:str, AS_file:str, source:str, out_dir:str):
-
+    """
+    Parse pathes announced in dump.txt files
+    Extracted connected ASes if one of the twoe if French
+    """
     global AS, AS_fr, neighbor
 
     nodes = set()
@@ -49,7 +61,6 @@ def get_path(AS_FR_file:str, AS_file:str, source:str, out_dir:str):
 
     AS_fr = load_json_file(AS_FR_file)
     AS = load_json_file(AS_file)
-
 
     for line in open(source, "r"):
         ASpath = line.split("|")[6].split(" ")
@@ -73,6 +84,7 @@ def get_path(AS_FR_file:str, AS_file:str, source:str, out_dir:str):
     print("Nodes : ", len(nodes))
     print("Links : ", len(links))
 
+    # Sorted  and print neighbor dict
     sorted_tuples = sorted(neighbor.items(), key=lambda item: item[1])
     sorted_dict = {k: v for k, v in sorted_tuples}
     print("FR neighbor :\n", sorted_dict)

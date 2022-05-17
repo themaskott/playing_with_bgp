@@ -5,6 +5,10 @@ from netaddr import IPAddress
 
 
 def get_annouced_IP( AS_file:str, source:str ):
+    """
+    Update an AS.json file with announced prefixes per AS
+    Announces are extracted out of a dump.txt file (ie bview)
+    """
     AS = {}
 
     AS = load_json_file(AS_file)
