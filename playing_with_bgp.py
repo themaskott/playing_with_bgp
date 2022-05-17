@@ -96,9 +96,11 @@ if __name__ == "__main__":
 
 
     if args.ip:
-        AS_ok, dump_ok = check_datas.check_sources_ip( args.source_ip )
+        AS_ok, AS_FR_ok, dump_ok = check_datas.check_sources_ip( args.source_ip )
         if not dump_ok: print("[-] dump.txt not present in datas")
         if not AS_ok: print("[-] AS.json not present in results, please generate it using --ases")
+        if not AS_FR_ok: print("[-] AS_FR.json not present in results, please generate it using --ases --only-fr")
 
         if AS_ok and dump_ok:
             get_IP.get_annouced_IP( "results/AS.json", args.source_ip )
+            get_IP.get_annouced_IP( "results/AS_FR.json", args.source_ip )
