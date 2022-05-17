@@ -195,7 +195,7 @@ Will take `AS.json`, `AS_FR.json` and `dump.txt` to generate csv file of links b
 
 `playing_with_bgp.py --ip`
 
-Will take `dump.txt` and `AS.json`, to produce a new `AS.json` including annouced prefixes per AS.
+Will take `dump.txt` and `AS.json | AS_FR.json`, to produce a new `AS.json | AS_FR.json` including announced prefixes per AS.
 
 **Caution** : those prefixes are from a bview dump, so it reveals real annoucements and no who is the legitimate owner of a prefix.
 
