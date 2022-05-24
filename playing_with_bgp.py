@@ -36,17 +36,14 @@ def getArgParser():
     group_action.add_argument( "--ip", action="store_true", help="Complete an AS.json file with annouced prefixes")
     group_action.add_argument( "--search", action="store_true", help="Search inconsistancies in announcements (several ases announcing same prefix)")
 
-
     group_as = argparser.add_argument_group("AS")
     group_as.add_argument( "--web", action="store_true", help="Retrieve AS numbers and name from web or local file")
     group_as.add_argument( "--format", action="store", default="json", help="Output format json or csv, default json" )
     group_as.add_argument( "--only-fr", action="store_true", default=False, help="Extract only french ASes, default all" )
 
-
     argparser.add_argument( "--version", action="version", version="%(prog)s beta")
 
     return argparser
-
 
 if __name__ == "__main__":
 
