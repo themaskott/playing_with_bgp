@@ -1,0 +1,5 @@
+igraph
+pandas
+numpy
+netaddr
+requests
