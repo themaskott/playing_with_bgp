@@ -37,22 +37,10 @@ def getArgParser():
 
 
     group_as = argparser.add_argument_group("AS")
-    group_as.add_argument( "--source_as", action="store", default="web", help="Source file, default from web" )
+    group_as.add_argument( "--web", action="store_true", help="Retrieve AS numbers and name from web or local file")
     group_as.add_argument( "--format", action="store", default="json", help="Output format json or csv, default json" )
     group_as.add_argument( "--only-fr", action="store_true", default=False, help="Extract only french ASes, default all" )
 
-    group_path = argparser.add_argument_group("PATH")
-    group_path.add_argument( "--fr", action="store", default="results/AS_FR.json", help="French ASes file, default AS_FR.json" )
-    group_path.add_argument( "--all", action="store", default="results/AS.json", help="All ASes file, default AS.json" )
-    group_path.add_argument( "--dump", action="store", default="datas/dump.txt", help="Bview dump file, default dump.txt" )
-
-
-    group_hjk = argparser.add_argument_group("HIJACK")
-    group_hjk.add_argument( "--source_hjk", action="store", default="datas/all.hijacks.json", help="Source file, all.hijacks.json" )
-    group_hjk.add_argument( "--all_as", action="store", default="results/AS.json", help="All ASes file, default AS.json" )
-
-    group_ip = argparser.add_argument_group("IP")
-    group_ip.add_argument( "--source_ip", action="store", default="datas/dump.txt", help="Bview dump file, default dump.txt" )
 
     argparser.add_argument( "--version", action="version", version="%(prog)s beta")
 
@@ -64,43 +52,40 @@ if __name__ == "__main__":
     args = getArgParser().parse_args()
 
     DATAS_DIR, RESULTS_DIR = check_datas.check_directories()
-
+    AS_ok, AS_FR_ok, dump_ok, autnums_ok, hijack_ok, links_ok = check_datas.check_sources()
 
     if args.ases:
-        if args.source_as == "web":
+        if args.web:
             get_AS.extract_AS( get_AS.update_AS(), args.format, args.only_fr, RESULTS_DIR )
         else:
-            if check_datas.check_sources_ases( args.source_as ):
-                get_AS.extract_AS( open(args.source_as ).read(), args.format, args.only_fr, RESULTS_DIR )
+            if autnums_ok:
+                get_AS.extract_AS( open(  ).read(), args.format, args.only_fr, RESULTS_DIR )
             else:
-                print(f"[-] {args.source} not present")
+                print(f"[-] datas/autnums.html not present")
 
     if args.path:
-        AS_ok, AS_FR_ok, dump_ok, = check_datas.check_sources_path( args.fr, args.all, args.dump )
         if not AS_ok: print("[-] AS.json not present in results, please generate it using --ases")
         if not AS_FR_ok: print("[-] AS_FR.json not present in results, please generate it using --ases")
         if not dump_ok: print("[-] dump.txt not present in datas")
 
         if AS_ok and AS_FR_ok and dump_ok:
-            get_AS_PATH.get_path( args.fr, args.all, args.dump, RESULTS_DIR )
+            get_AS_PATH.get_path( "results/AS_FR.json", "results/AS.json", "datas/dump.txt", RESULTS_DIR )
 
 
     if args.hijack:
-        hijack_ok, AS_ok = check_datas.check_sources_hijack( args.source_hjk, args.all_as )
         if not hijack_ok: print("[-] all.hijack.json not present in datas")
         if not AS_ok: print("[-] AS.json not present in results, please generate it using --ases")
 
         if AS_ok and hijack_ok:
             parse_hijack.search_hijacker(DATAS_DIR, RESULTS_DIR)
-            search_announces.search_inconsistancies( args.all_as )
+            search_announces.search_inconsistancies( "results/AS.json" )
 
 
     if args.ip:
-        AS_ok, AS_FR_ok, dump_ok = check_datas.check_sources_ip( args.source_ip )
         if not dump_ok: print("[-] dump.txt not present in datas")
         if not AS_ok: print("[-] AS.json not present in results, please generate it using --ases")
         if not AS_FR_ok: print("[-] AS_FR.json not present in results, please generate it using --ases --only-fr")
 
         if AS_ok and dump_ok:
-            get_IP.get_annouced_IP( "results/AS.json", args.source_ip )
-            get_IP.get_annouced_IP( "results/AS_FR.json", args.source_ip )
+            get_IP.get_annouced_IP( "results/AS.json", "datas/dump.txt" )
+            get_IP.get_annouced_IP( "results/AS_FR.json", "datas/dump.txt" )

@@ -20,3 +20,6 @@ def check_sources_hijack(source:str, all:str ) -> bool:
 
 def check_sources_ip( dump:str) -> bool:
     return path.isfile( "results/AS.json"), path.isfile( "results/AS_FR.json"), path.isfile( dump )
+
+def check_sources() -> bool:
+    return path.isfile( "results/AS.json"), path.isfile( "results/AS_FR.json"), path.isfile( "datas/dump.txt" ), path.isfile( "datas/autnums.html" ), path.isfile( "datas/all.hijacks.json" ), path.isfile( "results/links_AS_fr.cvs" )
