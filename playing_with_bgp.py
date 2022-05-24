@@ -34,6 +34,7 @@ def getArgParser():
     group_action.add_argument( "--path", action="store_true", help="Extract and computes path anoucements from sources")
     group_action.add_argument( "--hijack", action="store_true", help="Parse all.hijack.json for bgp hijacks")
     group_action.add_argument( "--ip", action="store_true", help="Complete an AS.json file with annouced prefixes")
+    group_action.add_argument( "--search", action="store_true", help="Search inconsistancies in announcements (several ases announcing same prefix)")
 
 
     group_as = argparser.add_argument_group("AS")
@@ -89,3 +90,9 @@ if __name__ == "__main__":
         if AS_ok and dump_ok:
             get_IP.get_annouced_IP( "results/AS.json", "datas/dump.txt" )
             get_IP.get_annouced_IP( "results/AS_FR.json", "datas/dump.txt" )
+
+    if args.search:
+        if not AS_ok: print("[-] AS.json not present in results, please generate it using --ases")
+
+        if AS_ok:
+            search_annouces.search_inconsistancies("results/AS.json")
