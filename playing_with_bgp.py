@@ -95,4 +95,4 @@ if __name__ == "__main__":
         if not AS_ok: print("[-] AS.json not present in results, please generate it using --ases")
 
         if AS_ok:
-            search_annouces.search_inconsistancies("results/AS.json")
+            search_announces.search_inconsistancies("results/AS.json")
