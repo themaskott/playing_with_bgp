@@ -89,38 +89,23 @@ Links between French ASes and other ASes.
 ## Some features
 
 ```
-usage: playing_with_bgp.py [-h] [--ases | --path | --hijack | --ip] [--source_as SOURCE_AS] [--format FORMAT] [--only-fr] [--fr FR] [--all ALL] [--dump DUMP] [--source_hjk SOURCE_HJK] [--all_as ALL_AS]
-               [--source_ip SOURCE_IP] [--version]
+usage: playing_with_bgp.py [-h] [--ases | --path | --hijack | --ip] [--web] [--format FORMAT] [--only-fr] [--version]
 
 Some tools to play with BGP and ASes
 
 optional arguments:
-  -h, --help            show this help message and exit
-  --ases                Extract and computes ASes from sources
-  --path                Extract and computes path anoucements from sources
-  --hijack              Parse all.hijack.json for bgp hijacks
-  --ip                  Complete an AS.json file with annouced prefixes
-  --version             show program's version number and exit
+  -h, --help       show this help message and exit
+  --ases           Extract and computes ASes from sources
+  --path           Extract and computes path anoucements from sources
+  --hijack         Parse all.hijack.json for bgp hijacks
+  --ip             Complete an AS.json file with annouced prefixes
+  --version        show program's version number and exit
 
 AS:
-  --source_as SOURCE_AS
-                        Source file, default from web
-  --format FORMAT       Output format json or csv, default json
-  --only-fr             Extract only french ASes, default all
+  --web            Retrieve AS numbers and name from web or local file
+  --format FORMAT  Output format json or csv, default json
+  --only-fr        Extract only french ASes, default all
 
-PATH:
-  --fr FR               French ASes file, default AS_FR.json
-  --all ALL             All ASes file, default AS.json
-  --dump DUMP           Bview dump file, default dump.txt
-
-HIJACK:
-  --source_hjk SOURCE_HJK
-                        Source file, all.hijacks.json
-  --all_as ALL_AS       All ASes file, default AS.json
-
-IP:
-  --source_ip SOURCE_IP
-                        Bview dump file, default dump.txt
   ```
 
   `--ases` : produce `AS[_FR].json` files (or csv if asked)
