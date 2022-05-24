@@ -59,7 +59,7 @@ if __name__ == "__main__":
             get_AS.extract_AS( get_AS.update_AS(), args.format, args.only_fr, RESULTS_DIR )
         else:
             if autnums_ok:
-                get_AS.extract_AS( open(  ).read(), args.format, args.only_fr, RESULTS_DIR )
+                get_AS.extract_AS( open( "datas/autnums.html" ).read(), args.format, args.only_fr, RESULTS_DIR )
             else:
                 print(f"[-] datas/autnums.html not present")
 
