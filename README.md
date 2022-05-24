@@ -89,7 +89,7 @@ Links between French ASes and other ASes.
 ## Some features
 
 ```
-usage: playing_with_bgp.py [-h] [--ases | --path | --hijack | --ip] [--web] [--format FORMAT] [--only-fr] [--version]
+usage: playing_with_bgp.py [-h] [--ases | --path | --hijack | --ip | --search] [--web] [--format FORMAT] [--only-fr] [--version]
 
 Some tools to play with BGP and ASes
 
@@ -99,12 +99,14 @@ optional arguments:
   --path           Extract and computes path anoucements from sources
   --hijack         Parse all.hijack.json for bgp hijacks
   --ip             Complete an AS.json file with annouced prefixes
+  --search         Search inconsistancies in announcements (several ases announcing same prefix)
   --version        show program's version number and exit
 
 AS:
   --web            Retrieve AS numbers and name from web or local file
   --format FORMAT  Output format json or csv, default json
   --only-fr        Extract only french ASes, default all
+
 
   ```
 
