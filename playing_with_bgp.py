@@ -72,15 +72,11 @@ if __name__ == "__main__":
         if AS_ok and AS_FR_ok and dump_ok:
             get_AS_PATH.get_path( "results/AS_FR.json", "results/AS.json", "datas/dump.txt", RESULTS_DIR )
 
-
     if args.hijack:
         if not hijack_ok: print("[-] all.hijack.json not present in datas")
-        if not AS_ok: print("[-] AS.json not present in results, please generate it using --ases")
 
         if AS_ok and hijack_ok:
             parse_hijack.search_hijacker(DATAS_DIR, RESULTS_DIR)
-            search_announces.search_inconsistancies( "results/AS.json" )
-
 
     if args.ip:
         if not dump_ok: print("[-] dump.txt not present in datas")
